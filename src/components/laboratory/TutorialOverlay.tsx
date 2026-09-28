@@ -4,9 +4,6 @@ import { useExperiment } from '../../stores/experimentStore';
 export function TutorialOverlay() {
   const { state } = useExperiment();
 
-  // Only show this overlay if in Learn Mode
-  if (state.settings.mode !== 'learn') return null;
-
   // Determine the current step automatically based on the experiment state
   const step = useMemo(() => {
     if (!state.settings.lampOn) return 1;
@@ -20,6 +17,9 @@ export function TutorialOverlay() {
 
     return 5;
   }, [state]);
+
+  // Only show this overlay if in Learn Mode
+  if (state.settings.mode !== 'learn') return null;
 
   const steps = [
     { title: "Step 1: Turn on the Lamp", desc: "Toggle the Sodium Lamp switch in the Controls Panel to illuminate the apparatus." },
